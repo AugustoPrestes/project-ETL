@@ -1,8 +1,9 @@
 from bs4 import BeautifulSoup
 from zipfile import ZipFile
 from typing import List, Dict
+from .interfaces.html_collector import HtmlCollectorInterface
 
-class HtmlCollector():
+class HtmlCollector(HtmlCollectorInterface):
     def collect_essential_information(self, html: str) -> List[Dict[str, str]]:
         # Instanciando o bs4
         soup = BeautifulSoup(html, 'html.parser')
