@@ -12,7 +12,7 @@ def test_extract():
     extract_html = ExtractHtml(http_requester, html_collector)
     response = extract_html.extract()
 
-
+    print(response)
     # Bloco de Confirmações
     assert isinstance(response, ExtractContract)
     assert http_requester.request_from_page_count == 1
