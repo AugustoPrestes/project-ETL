@@ -1,8 +1,8 @@
-from datetime import date
-
+from datetime import datetime
 from src.drivers.interfaces.http_requester import HttpRequesterInterface
 from src.drivers.interfaces.html_collector import HtmlCollectorInterface
 from src.stages.contracts.extract_contract import ExtractContract
+from src.errors.extract_error import ExtractError
 
 
 class ExtractHtml:
@@ -12,10 +12,14 @@ class ExtractHtml:
         self.__html_collector = html_collector
 
     def extract(self) -> ExtractContract:
-        html_information = self.__http_requester.request_from_page()
-        essential_information = self.__html_collector.collect_essential_information(html_information['html'])
-        
-        return ExtractContract(
-            raw_information_content=essential_information,
-            extraction_date=date.today()
-        ) 
+        try:
+            html_information = self.__http_requester.request_from_page()
+            essential_information = self.__html_collector.collect_essential_information(html_information['html'])
+            
+            return ExtractContract(
+                transent_information_content = essential_information,        
+                transent_information_length = len(essential_information),
+                extraction_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            )
+        except Exception as exception:
+            raise ExtractError(str(exception)) from exception

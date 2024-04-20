@@ -8,4 +8,4 @@ def test_collect_essential_information():
     html_collector = HtmlCollector()
     essential_information = html_collector.collect_essential_information(http_request_response["html"])
 
-    print(essential_information)
+    print(essential_information) 

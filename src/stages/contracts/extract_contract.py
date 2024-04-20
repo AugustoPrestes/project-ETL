@@ -3,7 +3,8 @@ from collections import namedtuple
 ExtractContract = namedtuple(
     "ExtractContract",
     '''
-        raw_information_content
+        transent_information_content
+        transent_information_length
         extraction_date
     '''
 )
